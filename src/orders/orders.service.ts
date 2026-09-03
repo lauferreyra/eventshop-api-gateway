@@ -4,9 +4,9 @@ import axios from 'axios';
 
 @Injectable()
 export class OrdersService {
-    private readonly orderServiceUrl: string;
-    
-    constructor(
+  private readonly orderServiceUrl: string;
+
+  constructor(
     private readonly configService: ConfigService,
   ) {
     this.orderServiceUrl =
@@ -15,19 +15,21 @@ export class OrdersService {
       );
   }
 
-  async getOrders() {
-    const response = await axios.get(
-      `${this.orderServiceUrl}/orders`,
-    );
-
-    return response.data;
-  }
-
-    async createOrder(order: unknown) {
-    const response = await axios.post(
-      `${this.orderServiceUrl}/orders`,
-      order,
-    );
+  async createOrder(
+    order: unknown,
+    correlationId: string,
+  ) {
+    const response =
+      await axios.post(
+        `${this.orderServiceUrl}/orders`,
+        order,
+        {
+          headers: {
+            'X-Correlation-ID':
+              correlationId,
+          },
+        },
+      );
 
     return response.data;
   }

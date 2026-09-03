@@ -1,8 +1,8 @@
 import {
+  Body,
   Controller,
-  Get,
+  Headers,
   Post,
-  Body
 } from '@nestjs/common';
 
 import { OrdersService } from './orders.service.js';
@@ -13,17 +13,16 @@ export class OrdersController {
     private readonly ordersService: OrdersService,
   ) {}
 
-  @Get()
-  async getOrders() {
-    return this.ordersService.getOrders();
-  }
-
   @Post()
   async createOrder(
     @Body() order: unknown,
+
+    @Headers('X-Correlation-ID')
+    correlationId: string,
   ) {
     return this.ordersService.createOrder(
       order,
+      correlationId,
     );
   }
 }

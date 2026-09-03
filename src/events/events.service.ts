@@ -15,6 +15,15 @@ export class EventsService {
       );
   }
 
+  async getEvents() {
+    const response =
+      await axios.get(
+        `${this.inventoryServiceUrl}/events`,
+      );
+
+    return response.data;
+  }
+
   async getEvent(name: string) {
     const response =
       await axios.get(

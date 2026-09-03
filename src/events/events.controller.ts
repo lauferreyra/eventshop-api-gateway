@@ -12,6 +12,11 @@ export class EventsController {
     private readonly eventsService: EventsService,
   ) {}
 
+  @Get()
+  async getEvents() {
+    return this.eventsService.getEvents();
+  }
+
   @Get(':name')
   async getEvent(
     @Param('name') name: string,

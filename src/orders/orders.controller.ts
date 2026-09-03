@@ -5,6 +5,7 @@ import {
   Post,
 } from '@nestjs/common';
 
+import { CreateOrderDto } from './dto/create-order.dto.js';
 import { OrdersService } from './orders.service.js';
 
 @Controller('orders')
@@ -15,7 +16,7 @@ export class OrdersController {
 
   @Post()
   async createOrder(
-    @Body() order: unknown,
+    @Body() order: CreateOrderDto,
 
     @Headers('X-Correlation-ID')
     correlationId: string,

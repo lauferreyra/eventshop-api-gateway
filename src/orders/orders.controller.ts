@@ -3,6 +3,8 @@ import {
   Controller,
   Headers,
   Post,
+  Get,
+  Param
 } from '@nestjs/common';
 
 import { CreateOrderDto } from './dto/create-order.dto.js';
@@ -26,4 +28,11 @@ export class OrdersController {
       correlationId,
     );
   }
-}
+
+  @Get(':id')
+  async getOrder(
+    @Param('id') id: string,
+  ) {
+    return this.ordersService.getOrder(id);
+  }
+  }

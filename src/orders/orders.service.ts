@@ -33,4 +33,12 @@ export class OrdersService {
 
     return response.data;
   }
+
+  async getOrder(id: string) {
+  const response = await axios.get(
+    `${this.orderServiceUrl}/orders/${id}`,
+  );
+
+  return response.data;
+}
 }
